@@ -1,5 +1,5 @@
 {% set name = "bempp-cl" %}
-{% set version = "0.1.1" %}
+{% set version = "0.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/bempp/bempp-cl/archive/v{{ version }}.tar.gz
-  sha256: cc82f9026ab52e5b61145799cdcf572c1f5083a3863ee5e16f0a3f5e34ba2a47
+  sha256: 6cdbf06802d3d35d5ddd581258195872cc337f058feb59621f7829dbe962af16
 build:
   number: 0
-  skip: True  # [py<37]
+  skip: True  # [py<38]
   skip: True  # [win]
-  skip: True  # [osx]
+  skip: True  # [linux32]
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
@@ -23,10 +23,10 @@ requirements:
     - python
     - numpy
     - scipy
-    - numba
-    - pocl
-    - pyopencl
-    - meshio >=4.0
+    - numba >= 0.51.2
+    - pocl >= 1.5 # [not osx]
+    - pyopencl >= 2020.2.1 # [not osx]
+    - meshio >= 4.1.1
     - plotly
     - gmsh
 
